@@ -14,7 +14,24 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <table>
+                        <thead>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>User</th>
+                            <th>Admin</th>
+                        </thead>
+                        <tbody>
+                            @foreach($users as $user)
+                                <tr>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td><input type="checkbox"{{$user->hasRole('User') ? 'checked' : ''}} name="role_user"></td>
+                                    <td><input type="checkbox"{{$user->hasRole('Admin') ? 'checked' : ''}} name="role_admin"></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
