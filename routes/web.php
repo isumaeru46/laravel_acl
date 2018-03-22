@@ -11,10 +11,27 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['middleware'=>'web'], function (){
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Auth::routes();
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::post('/postAdminAssignRoles',[
+        'uses' => 'HomeController@postAdminAssignRoles',
+        'as'=> 'postAdminAssignRoles',
+        'middleware' =>'roles',
+        'roles'=>['Admin']
+    ]);
+
+
+
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
